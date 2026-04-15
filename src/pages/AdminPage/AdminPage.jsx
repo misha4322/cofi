@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { AnimatePresence, motion } from 'framer-motion'
+import toast from 'react-hot-toast'
 import { loginAdminSuccess, logoutAdmin } from '../../store/slices/adminSlice'
 import { updateOrderStatus } from '../../store/slices/ordersSlice'
 import { hashPassword } from '../../utils/security'
@@ -13,6 +15,17 @@ const statusOptions = [
   { value: 'cancelled', label: 'Отменен' },
 ]
 
+const statusMessages = {
+  delivered: {
+    title: 'Подтвердить "Доставлен"',
+    text: 'Точно хотите отметить заказ как "Доставлен"? После этого он закроется в админке.',
+  },
+  cancelled: {
+    title: 'Подтвердить "Отменен"',
+    text: 'Точно хотите отменить заказ? Клиент увидит, что заказ отменен со стороны магазина.',
+  },
+}
+
 const AdminPage = () => {
   const dispatch = useDispatch()
   const { db, isLoggedIn } = useSelector((state) => state.admin)
@@ -21,6 +34,7 @@ const AdminPage = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [notes, setNotes] = useState({})
+  const [confirmWidget, setConfirmWidget] = useState(null)
 
   const sortedOrders = useMemo(
     () => [...orders]
@@ -41,13 +55,18 @@ const AdminPage = () => {
     setError('Неверный логин или пароль')
   }
 
-  const handleStatusChange = (orderId, status) => {
-    if (status === 'delivered') {
-      const confirmed = window.confirm('Точно хотите отметить заказ как "Доставлен"? После этого он закроется в админке.')
-      if (!confirmed) return
-    }
+  const applyStatusChange = (orderId, status) => {
     dispatch(updateOrderStatus({ orderId, status, note: notes[orderId] || '' }))
     setNotes((prev) => ({ ...prev, [orderId]: '' }))
+    toast.success(`Статус заказа обновлен: ${statusOptions.find((item) => item.value === status)?.label || status}`)
+  }
+
+  const handleStatusChange = (orderId, status) => {
+    if (status === 'delivered' || status === 'cancelled') {
+      setConfirmWidget({ orderId, status })
+      return
+    }
+    applyStatusChange(orderId, status)
   }
 
   if (!isLoggedIn) {
@@ -127,6 +146,47 @@ const AdminPage = () => {
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {confirmWidget ? (
+          <motion.div
+            className="admin-confirm-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) {
+                setConfirmWidget(null)
+              }
+            }}
+          >
+            <motion.div
+              className="admin-confirm-card"
+              initial={{ opacity: 0, y: 16, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
+              <h3>{statusMessages[confirmWidget.status].title}</h3>
+              <p>{statusMessages[confirmWidget.status].text}</p>
+              <div className="admin-confirm-actions">
+                <button
+                  className="confirm-btn"
+                  onClick={() => {
+                    applyStatusChange(confirmWidget.orderId, confirmWidget.status)
+                    setConfirmWidget(null)
+                  }}
+                >
+                  Да, подтвердить
+                </button>
+                <button className="cancel-btn" onClick={() => setConfirmWidget(null)}>
+                  Отмена
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   )
 }

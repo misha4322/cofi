@@ -2,6 +2,15 @@ import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import './OrdersPage.css'
 
+const clientStatusLabels = {
+  pending: 'Ожидает подтверждения',
+  accepted: 'Принят в работу',
+  preparing: 'Готовится',
+  delivering: 'Передан курьеру',
+  delivered: 'Доставлен',
+  cancelled: 'Отменен',
+}
+
 const OrdersPage = () => {
   const orders = useSelector((state) => state.orders.orders)
   const [phoneFilter, setPhoneFilter] = useState('')
@@ -97,7 +106,7 @@ const OrdersPage = () => {
                   {order.adminActions.length === 0 ? (
                     <div className="timeline-item">
                       <div>
-                        <strong>pending</strong>
+                        <strong>{clientStatusLabels.pending}</strong>
                         <p>История действий пока пуста.</p>
                       </div>
                       <span>—</span>
@@ -106,8 +115,12 @@ const OrdersPage = () => {
                     order.adminActions.map((action) => (
                       <div key={action.id} className="timeline-item">
                         <div>
-                          <strong>{action.status}</strong>
-                          {action.note ? <p>{action.note}</p> : null}
+                          <strong>{clientStatusLabels[action.status] || action.status}</strong>
+                          {action.status === 'cancelled' ? (
+                            <p>Отменен со стороны магазина</p>
+                          ) : action.note ? (
+                            <p>{action.note}</p>
+                          ) : null}
                         </div>
                         <span>{new Date(action.createdAt).toLocaleString('ru-RU')}</span>
                       </div>
