@@ -1,0 +1,59 @@
+.footer {
+  background: #1a0f0a;
+  color: #eee;
+  padding: 3rem 0 1.5rem;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-section h3 {
+  color: #d4a574;
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-section h4 {
+  color: #d4a574;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+}
+
+.footer-section p {
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-section a {
+  display: block;
+  color: #ddd;
+  text-decoration: none;
+  margin-bottom: 0.7rem;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: #d4a574;
+}
+
+.iphone {
+  width: 20px;
+  opacity: 0.8;
+}
+
+.footer-bottom {
+  border-top: 1px solid #3a2a22;
+  padding-top: 1.5rem;
+  text-align: center;
+  color: #aaa;
+}

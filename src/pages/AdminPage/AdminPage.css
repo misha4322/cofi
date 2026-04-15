@@ -1,0 +1,130 @@
+.admin-page {
+  padding: 2rem 0 3rem;
+}
+
+.admin-login-card {
+  max-width: 440px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 28px rgba(26, 15, 10, 0.12);
+}
+
+.admin-login-form {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.admin-login-form input,
+.admin-login-form button,
+.admin-order-card textarea {
+  border: 1px solid #dbc2a8;
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+}
+
+.admin-login-form button,
+.admin-topbar button,
+.admin-status-actions button {
+  border: none;
+  background: #2c1810;
+  color: #fff;
+  cursor: pointer;
+}
+
+.admin-error {
+  color: #a22;
+  font-size: 0.9rem;
+}
+
+.admin-hint {
+  margin-top: 0.8rem;
+  color: #715a48;
+  font-size: 0.86rem;
+}
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-topbar button {
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1rem;
+}
+
+.admin-empty-state {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  color: #6d5646;
+  box-shadow: 0 10px 22px rgba(25, 14, 9, 0.1);
+}
+
+.admin-order-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 10px 22px rgba(25, 14, 9, 0.1);
+}
+
+.admin-order-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-order-card textarea {
+  width: 100%;
+  margin-top: 0.8rem;
+  min-height: 66px;
+  resize: vertical;
+}
+
+.admin-status-actions {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.admin-status-actions button {
+  border-radius: 999px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 300px) {
+  .admin-page {
+    padding: 1rem 0 2rem;
+  }
+
+  .admin-login-card,
+  .admin-order-card {
+    border-radius: 12px;
+    padding: 0.75rem;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-status-actions button {
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+  }
+}

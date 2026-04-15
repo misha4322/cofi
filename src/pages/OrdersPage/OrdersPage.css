@@ -1,0 +1,161 @@
+.orders-page {
+  padding: 2rem 0 3rem;
+}
+
+.orders-header-card {
+  background: linear-gradient(145deg, #2f1d14, #473024);
+  color: #fff;
+  border-radius: 18px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 12px 28px rgba(44, 24, 16, 0.2);
+}
+
+.orders-filter-input {
+  width: 100%;
+  border: 1px solid #d7b08d;
+  border-radius: 12px;
+  margin-top: 1rem;
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+}
+
+.orders-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.orders-tabs button {
+  border: 1px solid #d6b190;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.orders-tabs button.active {
+  background: #fff;
+  color: #2f1d14;
+}
+
+.orders-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.order-card {
+  border-radius: 16px;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(30, 16, 10, 0.08);
+}
+
+.order-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.order-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.status-pending,
+.status-accepted,
+.status-preparing,
+.status-delivering {
+  color: #7a4a24;
+  background: #f6e4d5;
+}
+
+.status-delivered {
+  color: #1b6b3f;
+  background: #d9f3e6;
+}
+
+.status-cancelled {
+  color: #8c2d2d;
+  background: #f8dddd;
+}
+
+.order-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.order-timeline {
+  border-top: 1px solid #f1e7dd;
+  padding-top: 0.8rem;
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-left: 3px solid #d4a574;
+  padding: 0.35rem 0 0.35rem 0.6rem;
+}
+
+.timeline-item span {
+  font-size: 0.8rem;
+  color: #7c6a5a;
+  white-space: nowrap;
+}
+
+.orders-empty {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.1rem;
+  color: #6f5a4a;
+}
+
+@media (max-width: 520px) {
+  .order-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 300px) {
+  .orders-page {
+    padding: 1rem 0 2rem;
+  }
+
+  .orders-header-card,
+  .order-card {
+    border-radius: 12px;
+    padding: 0.75rem;
+  }
+
+  .orders-header-card h1 {
+    font-size: 1.2rem;
+  }
+
+  .orders-filter-input {
+    font-size: 0.9rem;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .orders-tabs {
+    flex-direction: column;
+  }
+
+  .orders-tabs button {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .timeline-item {
+    flex-direction: column;
+  }
+}
